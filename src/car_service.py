@@ -10,8 +10,12 @@ def view_cars():
     """)
 
     print("\n--- Car Inventory ---")
+    if not rows:
+        print("No cars found.")
+        return
+
     for car in rows:
-        print(f"{car[0]} | {car[1]} {car[2]} | ₹{car[3]} per day | Status: {car[4]}")
+        print(f"{car['car_id']} | {car['brand']} {car['model']} | ₹{car['daily_rate']} per day | Status: {car['status']}")
     print("-------------------------")
 
 
@@ -64,5 +68,5 @@ def show_available_cars():
         return
 
     for car in rows:
-        print(f"{car[0]} | {car[1]} {car[2]} | ₹{car[3]} per day")
+        print(f"{car['car_id']} | {car['brand']} {car['model']} | ₹{car['daily_rate']} per day")
     print("--------------------------")

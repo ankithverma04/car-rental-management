@@ -1,5 +1,5 @@
 # customer_service.py
-from db import fetch_all, execute_query
+from db import fetch_all, fetch_one, execute_query
 
 def add_customer():
     """Add a new customer to the database."""
@@ -35,19 +35,18 @@ def view_customers():
         return
 
     for c in rows:
-        print(f"{c[0]} | {c[1]} | {c[2]} | {c[3]}")
+        print(f"{c['customer_id']} | {c['full_name']} | {c['email']} | {c['phone']}")
     print("-------------------------")
 
-    
+
 def find_customer_by_id(customer_id):
     """Return customer details for the given ID."""
-    rows = fetch_all("""
+    row = fetch_one("""
         SELECT customer_id, full_name, email, phone
         FROM customers
         WHERE customer_id = ?;
     """, (customer_id,))
-
-    return rows[0] if rows else None
+    return row  # either dict or None
 
 
 def search_customer():
@@ -66,7 +65,7 @@ def search_customer():
         return
 
     for c in rows:
-        print(f"{c[0]} | {c[1]} | {c[2]} | {c[3]}")
+        print(f"{c['customer_id']} | {c['full_name']} | {c['email']} | {c['phone']}")
     print("-------------------------")
 
 
